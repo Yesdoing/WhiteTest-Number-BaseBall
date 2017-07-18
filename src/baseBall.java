@@ -8,56 +8,63 @@ public class baseBall {
 
 		String[] computer = randomNumArr();
 
-		while(playGame(computer)) {
+		while (playGame(computer)) {
 		}
 	}
-	
-	private static String[] randomNumArr() {
-		String[] array = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-		
-		Collections.shuffle(Arrays.asList(array));
 
+	private static String[] randomNumArr() {
+		String[] array = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+		Collections.shuffle(Arrays.asList(array));
 		return array;
 	}
-	
+
 	private static String[] inputNumber() {
 		Scanner scan = new Scanner(System.in);
 		String[] input = new String[3];
-		
-		for(int i=0; i<input.length; i++) {
-			System.out.print(i+1 + "번째 숫자를 입력해주세요 : ");
+
+		for (int i = 0; i < input.length; i++) {
+			System.out.print(i + 1 + "번째 숫자를 입력해주세요 : ");
 			input[i] = scan.nextLine();
 		}
-		
+
 		return input;
 	}
-	
+
 	private static boolean playGame(String[] computer) {
-		String[] com = computer;
-		String[] player = inputNumber();
+		String com = "";
+		String player = "";
+		String[] playerArr = inputNumber();
 		int strike = 0;
 		int ball = 0;
+ 
 		
-		for(int i=0; i<3; i++) {
-			for(int j=0; j<3; j++) {
-				if(i==j && com[i].equals(player[j])) {
-					strike++;
-				} else if(com[i].equals(player[j])) {
-					ball++;
-				}
+		for (int i = 0; i < 3; i++) {
+			com += computer[i];
+			player += playerArr[i];
+		}
+				
+		for (int i = 0; i < 3; i++) {
+			if (com.charAt(i) == player.charAt(i)) {
+				strike++;
+			} else if (com.contains(player.charAt(i) + "")) {
+				ball++;
 			}
 		}
-		
+
 		System.out.println("결과!!");
-		if(strike != 0) System.out.println(strike + "스트라이크");
-		if(ball != 0) System.out.println(ball + "볼");
-		if(strike == 0 && ball == 0) System.out.println("낫싱");
-		if(strike == 3) {
+		if (strike != 0)
+			System.out.println(strike + "스트라이크");
+		if (ball != 0)
+			System.out.println(ball + "볼");
+		if (strike == 0 && ball == 0)
+			System.out.println("낫싱");
+		if (strike == 3) {
 			System.out.println("축하합니다. 게임이 종료됩니다.");
 			return false;
 		} else {
 			System.out.println("다시 숫자를 입력해주세요.");
 			return true;
 		}
-	} 
+	}
 }
